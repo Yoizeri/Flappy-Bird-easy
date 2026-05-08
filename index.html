@@ -235,7 +235,7 @@ function playCelebration() {
         // Pipe properties - SUPER SLOW
         const pipeWidth = 60;
         const pipeGap = 220;      // Huge opening
-        const pipeSpeed = 5;    // The pipes are basically crawling
+        let pipeSpeed = 5;    // The pipes are basically crawling
         let pipes = [];
         let pipeTimer = 0;
         let pipeInterval = 50;   // Way more time between pipes
@@ -529,6 +529,9 @@ function playCelebration() {
                     // Check for celebration every 10 points!
                     if (score > 0 && score % 10 === 0) {
                         playCelebration();
+                    if (pipeSpeed < 7) { 
+                        pipeSpeed += 0.2; }
+
                     } else {
                         playNote(880, 0.15, 'sine');
                     }
@@ -569,6 +572,7 @@ function playCelebration() {
         function startGame() {
             gameState = 'playing';
             score = 0;
+            pipeSpeed = 5
             scoreDisplay.textContent = score;
             bird.y = canvas.height / 2;
             bird.velocity = 0;
